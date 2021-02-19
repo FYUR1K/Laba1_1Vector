@@ -1,8 +1,7 @@
 #include <iostream>
+#include "Vector.h"
 
-class Vector{
-public:
-    ~Vector(){
+    Vector::~Vector(){
         if(num != nullptr) {
             delete[] num;
             size = 0;
@@ -10,12 +9,12 @@ public:
         }
     }
 
-    Vector(){ //конструктор по умолчанию
+    Vector::Vector(){ //конструктор по умолчанию
         num = new int[10];
         size = 10;
     }
 
-    Vector(const Vector &other){ // конструктор копирования
+    Vector::Vector(const Vector &other){ // конструктор копирования
         num = new int[other.Size()];
         for(size_t i = 0; i < other.Size(); ++i ){
             num[i] = other.num[i];
@@ -23,7 +22,7 @@ public:
         lenght = other.Size();
     }
 
-    Vector(const size_t& size, int* initValue){ // конструктор с параметрами
+    Vector::Vector(const size_t& size, int* initValue){ // конструктор с параметрами
         num = new int[size];
         for(size_t i = 0; i < size; ++i){
             num[i] = initValue[i];
@@ -31,7 +30,7 @@ public:
         lenght = size;
     }
 
-    Vector& operator=(const Vector &other){ //оператор присваивания
+    Vector&  Vector::operator=(const Vector &other){ //оператор присваивания
         if(num != nullptr){
             delete[] num;
         }
@@ -43,15 +42,15 @@ public:
     }
 
 
-    int& operator[](const size_t &index){ //возврат по индексу
+    int&  Vector::operator[](const size_t &index){ //возврат по индексу
         return num[index];
     }
 
-    size_t Size() const{ // Кол-во эл-тов
+    size_t Vector::Size() const{ // Кол-во эл-тов
         return lenght;
     }
 
-    int find(const int &value) const{ //файнд
+    int Vector::find(const int &value) const{ //файнд
         if(num != nullptr){
             for(size_t i = 0; i < lenght; ++i){
                 if (num[i] == value){
@@ -62,7 +61,7 @@ public:
         return -1;
     }
 
-    void push_back(const int &value){ //пуш бэк
+    void  Vector::push_back(const int &value){ //пуш бэк
         if(size == lenght) {
             int *new_num = new int[size + 10];
 
@@ -82,8 +81,7 @@ public:
         }
     }
 
-
-    Vector replace(const int &oldValue, const int &newValue){ //реплейс
+    Vector  Vector::replace(const int &oldValue, const int &newValue){ //реплейс
         if(num != nullptr){
             for(size_t i = 0; i < lenght; ++i){
                 if (num[i] == oldValue){
@@ -94,16 +92,7 @@ public:
         return *this;
     }
 
-    friend std::ostream& operator<<(std::ostream &out, const Vector &VEC_);
-
-
-private:
-    int* num;
-    size_t size = 0; // выделенная память
-    size_t lenght = 0; //кол-во элементов
-};
-
-std::ostream& operator<<(std::ostream &out,const Vector &VEC_ ){
+    std::ostream& operator<<(std::ostream &out,const Vector &VEC_ ){
     for(size_t i = 0; i < VEC_.Size(); ++i){
         out << VEC_.num[i] << " ";
     }
@@ -111,10 +100,7 @@ std::ostream& operator<<(std::ostream &out,const Vector &VEC_ ){
     return out;
 }
 
-
-
-
-int main(){
+    int main(){
     Vector(); //конструктор по умолчанию
     int mass[10] = {1,2,3,4,5,6,7,8,9,10}; // конструктор с параметрами
     Vector Primer1(10, mass);
@@ -140,15 +126,4 @@ int main(){
     std::cout <<"Пуш бэк и вывод вектора: " << Primer1 << '\n';
 
     std::cout <<"Файнд :" <<Primer1.find(3) << '\n'; //Файнд
-
-
-
-
-
-
-
-
-
-
-
 }

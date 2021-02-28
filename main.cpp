@@ -1,4 +1,4 @@
-#include "Laba2_1.cpp"
+#include "Laba1_1Vector.CPP"
 
     int main(){
     Vector(); //конструктор по умолчанию

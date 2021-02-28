@@ -15,7 +15,7 @@ public:
 
     size_t Size() const;
 
-    int& operator[](const size_t &index);
+    int& operator[](const size_t &index)const;
 
     int find(const int &value) const;
 
@@ -31,4 +31,4 @@ private:
     size_t lenght = 0; //кол-во элементов
 };
 
-#endif VECTOR_H
+#endif 

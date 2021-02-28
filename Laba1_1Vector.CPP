@@ -1,11 +1,10 @@
 #include <iostream>
+#include <fstream>
 #include "Vector.h"
 
     Vector::~Vector(){
         if(num != nullptr) {
             delete[] num;
-            size = 0;
-            lenght = 0;
         }
     }
 
@@ -30,19 +29,44 @@
         lenght = size;
     }
 
-    Vector&  Vector::operator=(const Vector &other){ //оператор присваивания
+     Vector&  Vector::operator=(const Vector &other){ //оператор присваивания
+
         if(num != nullptr){
+            
+            if (lenght != other.lenght)
+                {
+                    delete[] num;
+                    num = new int[size];
+                    for(size_t i = 0; i < size; ++i){
+                         num[i] = other.num[i];
+                    }
+                    lenght = size;
+                    return *this;
+                }
+
+            for (int i = 0; i < lenght; i++)
+                {
+                    if (num[i] != other.num[i])
+                    {
+                        delete[] num;
+                        break;
+                    }
+                    return *this;
+                }
+            
             delete[] num;
         }
+
         num = new int[size];
         for(size_t i = 0; i < size; ++i){
             num[i] = other.num[i];
         }
         lenght = size;
+        return *this;
     }
 
 
-    int&  Vector::operator[](const size_t &index){ //возврат по индексу
+    int&  Vector::operator[](const size_t &index)const{ //возврат по индексу
         return num[index];
     }
 
@@ -86,6 +110,7 @@
             for(size_t i = 0; i < lenght; ++i){
                 if (num[i] == oldValue){
                     num[i] = newValue;
+                    break;
                 }
             }
         }
@@ -100,30 +125,4 @@
     return out;
 }
 
-    int main(){
-    Vector(); //конструктор по умолчанию
-    int mass[10] = {1,2,3,4,5,6,7,8,9,10}; // конструктор с параметрами
-    Vector Primer1(10, mass);
 
-    Vector Primer2 = Primer1; //оператор присваивания
-
-    Vector Primer3(Primer1);// конструктор копирования
-
-    std::cout << "Оператор присваивания: "<< Primer2 << '\n';
-
-    std::cout << "Конструктор копирования: "<< Primer3 << '\n';
-
-    std::cout<< "возврат по индексу: " << Primer1[5] << '\n';//возврат по индексу
-
-    Primer1.replace(3,5);
-
-    std::cout <<"Реплейс: " << Primer1 << '\n'; //Реплейс
-
-    std::cout <<"Кол-во эл-тов: " <<  Primer1.Size() << '\n'; //Кол-во эл-тов
-
-    Primer1.push_back(3); //пуш_бэк
-
-    std::cout <<"Пуш бэк и вывод вектора: " << Primer1 << '\n';
-
-    std::cout <<"Файнд :" <<Primer1.find(3) << '\n'; //Файнд
-}

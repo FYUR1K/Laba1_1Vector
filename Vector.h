@@ -24,11 +24,11 @@ public:
     Vector replace(const int &oldValue, const int &newValue);
 
     friend std::ostream& operator<<(std::ostream &out, const Vector &VEC_);
-    
+
 private:
     int* num;
     size_t size = 0; // выделенная память
     size_t lenght = 0; //кол-во элементов
 };
 
-#endif 
+#endif

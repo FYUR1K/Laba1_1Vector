@@ -1,6 +1,7 @@
-#include "Laba1_1Vector.CPP"
+#include <iostream>
+#include "Vector.h"
 
-    int main(){
+int main(){
     Vector(); //конструктор по умолчанию
     int mass[10] = {1,2,3,4,5,6,7,8,9,10}; // конструктор с параметрами
     Vector Primer1(10, mass);

@@ -13,11 +13,12 @@ Vector::Vector(){ //конструктор по умолчанию
 }
 
 Vector::Vector(const Vector &other){ // конструктор копирования
-    num = new int[other.Size()];
-    for(size_t i = 0; i < other.Size(); ++i ){
+    num = new int[other.size];
+    for(size_t i = 0; i < other.lenght; ++i ){
         num[i] = other.num[i];
     }
     lenght = other.Size();
+    size = other.size;
 }
 
 Vector::Vector(const size_t& size, int* initValue){ // конструктор с параметрами
@@ -26,6 +27,7 @@ Vector::Vector(const size_t& size, int* initValue){ // конструктор с
         num[i] = initValue[i];
     }
     lenght = size;
+    this->size = size;
 }
 
 Vector&  Vector::operator=(const Vector &other){ //оператор присваивания копированием
@@ -39,7 +41,7 @@ Vector&  Vector::operator=(const Vector &other){ //оператор присва
         }
         return *this;
     }
-
+    return *this;
 }
 
 
